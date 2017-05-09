@@ -51,41 +51,71 @@ function reverseInPlace(arr) {
 
 function arrayToList(arr) {
     for(var i = arr.length - 1; i >= 0; i--) {
-        var list = {value: arr[i], rest: list}
+        var list = {value: arr[i], rest: list};
         }
-    return list
+    return list;
 }
 
 function listToArray(list) {
-    arr = []
+    arr = [];
     for (var node = list; node; node = node.rest) {
-        arr = arr.concat(node.value)
+        arr = arr.concat(node.value);
     }
-    return arr
+    return arr;
 }
 
 // console.log(arrayToList([1,2,3]))
 // console.log(listToArray(arrayToList([1,2,3])))
 
 function prepend(list, el) {
-    list = {value: el, rest: list}
-    return list
+    list = {value: el, rest: list};
+    return list;
 }
 
 
 function nth(list, n) {
-    limit = 1
+    limit = 1;
     for (var node = list; node; node = node.rest) {
         if (limit == n) {
-            return node.value
+            return node.value;
         }
-        limit++
+        limit++;
     }
 
-    return undefined
+    return undefined;
 }
 
 
 // console.log(nth(arrayToList([1,2,3,4]), 3))
 // console.log(prepend(arrayToList([1,2,3]), 0))
+
+
+/** DEEP COMPARISONS */
+
+
+function deepEquals(a, b) {
+    // console.log("First", typeof(a), typeof(b))
+    if (!(typeof(a) == typeof(b))) {
+        console.log(false)
+    } else if (typeof(a) == "object") {
+            for (var prop in a) {
+                // console.log("Prop is: ", a[prop])
+                deepEquals(a[prop], b[prop])
+            }
+    } else if(!(a === b)) {
+            console.log(false)
+    } else {
+        console.log(true)
+    }
+
+}
+
+var obj = {here: {is: "an"}, object: 2};
+// console.log(deepEquals(obj, obj));
+
+// deepEquals(obj, {here: 1, object: 2});
+// → false
+// deepEquals(obj, {here: {is: "an"}, object: 2});
+// → true
+
 
